@@ -1,0 +1,29 @@
+import os
+import re
+
+frameworks = {
+    'React': r'\bimport React\b',
+    'Next.js': r'\bimport\s*[(]?[\s\S]*?[)]?\s*{?\s*[\w\s,]*\s*}?\s*from\s*["\']next["\']'
+}
+
+def scan_for_frameworks(directory):
+    found_frameworks = set()  # Create a set to store the names of found frameworks
+
+    for framework, pattern in frameworks.items():
+        for root, dirs, files in os.walk(directory):
+            for file in files:
+                if file.endswith('.js'):
+                    with open(os.path.join(root, file), 'r') as f:
+                        content = f.read()
+                        if re.search(pattern, content):
+                            found_frameworks.add(framework)  # Add the framework to the set
+
+    if found_frameworks:
+        print("Frameworks found in the codebase:", ', '.join(found_frameworks))
+    else:
+        print("No supported frameworks found in the codebase.")
+
+# Use '.' to scan the current directory.
+directory_to_scan = './'
+scan_for_frameworks(directory_to_scan)
+
