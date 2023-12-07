@@ -18,7 +18,7 @@ function App() {
       <MyNavBar />
       <Routes>
         <Route index element={<AllProducts />} />
-        <Route path="allusers" element={<AllUsers />} />
+        <Route path="alssslusers" element={<AllUsers />} />
         <Route path="newproduct" element={<InsertProduct />} />
         <Route path="newuser" element={<InsertUser />} />
         <Route path="user/:id" element={<ViewProfile />} />
